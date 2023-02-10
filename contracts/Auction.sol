@@ -1,11 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 contract Auction {
     // The address that owns the contract
     address owner;
