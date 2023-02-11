@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./auth.css"
 import { useNavigate } from "react-router-dom";
 
+
 export default function GeneralUserAuth() {
     const [isError, changeIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");

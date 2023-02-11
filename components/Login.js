@@ -1,43 +1,57 @@
-import { useState } from 'react';
-import { loginFields } from "../constants/formFields";
-import Input from "./Input";
+import React, { useState } from "react";
 
-const fields = loginFields;
-let fieldsState = {};
-fields.forEach(field => fieldsState[field.id] = '');
+const LoginPage = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-export default function Login() {
-    const [loginState, setLoginState] = useState(fieldsState);
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+    };
 
-    const handleChange = (e) => {
-        setLoginState({ ...loginState, [e.target.id]: e.target.value })
-    }
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`Username: ${username} Password: ${password}`);
+        // Perform the login here
+    };
 
     return (
-        <form className="mt-8 space-y-6">
-            <div className="-space-y-px">
-                {
-                    fields.map(field =>
-                        <Input
-                            key={field.id}
-                            handleChange={handleChange}
-                            value={loginState[field.id]}
-                            labelText={field.labelText}
-                            labelFor={field.labelFor}
-                            id={field.id}
-                            name={field.name}
-                            type={field.type}
-                            isRequired={field.isRequired}
-                            placeholder={field.placeholder}
-                        />
+        <div className="w-1/3 mx-auto my-20">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded">
+                <h2 className="text-lg font-medium mb-4">Login</h2>
+                <div className="mb-4">
+                    <label htmlFor="username" className="block font-medium mb-2">
+                        Username
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={handleUsernameChange}
+                        className="w-full border border-gray-400 p-2 rounded"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="password" className="block font-medium mb-2">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        className="w-full border border-gray-400 p-2 rounded"
+                    />
+                </div>
+                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+                    Login
+                </button>
+            </form>
+        </div>
+    );
+};
 
-                    )
-                }
-            </div>
-
-
-
-        </form>
-    )
-}
+export default LoginPage;
