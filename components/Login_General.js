@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useNavigate } from "react-router-dom";
+import Router from "next/router";
+
 
 const UserLogin = () => {
     const [email, setEmail] = useState("");
@@ -30,20 +33,22 @@ const UserLogin = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Email: ${email} Password: ${password}`);
-        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userdata), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
             .then(res => {
                 return res.json()
             })
             .then(data => {
-                changeIsError(false)
+                // changeIsError(false)
+                console.log("huha")
                 localStorage.setItem("profile", JSON.stringify(data));
-                navigate('/');
+                Router.push('/');
             })
             .catch(e => {
+                console.log(userdata)
                 console.log(e)
                 console.log("Error Message Here")
-                setErrorMessage("Error: Invalid Credentials")
-                changeIsError(true)
+                //setErrorMessage("Error: Invalid Credentials")
+                //changeIsError(true)
             })
     };
 
