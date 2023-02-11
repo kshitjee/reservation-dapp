@@ -38,10 +38,10 @@ const Navbar = () => {
                         <Link style={{ color: `${textColor}` }} href='/dashboard'>Gallery</Link>
                     </li>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/login'>Login</Link>
+                        <Link style={{ color: `${textColor}` }} href='/Login'>Login</Link>
                     </li>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/signup'>Sign up</Link>
+                        <Link style={{ color: `${textColor}` }} href='/Signup'>Sign up</Link>
                     </li>
                 </ul>
 
