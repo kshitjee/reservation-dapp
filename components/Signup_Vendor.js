@@ -5,30 +5,50 @@ const VendorSignupForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
+    const [userData, setUserData] = useState({ name: "", email: "", password: "", address: "" })
+
 
     const handleNameChange = (event) => {
         setName(event.target.value);
+        setUserData({ ...userData, name: event.target.value });
     };
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+        setUserData({ ...userData, email: event.target.value });
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+        setUserData({ ...userData, password: event.target.value });
     };
 
     const handleAddressChange = (event) => {
         setAddress(event.target.value);
+        setUserData({ ...userData, address: event.target.value });
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(
-            
+
             `Name: ${name} Email: ${email} Password: ${password} Address: ${address}`
         );
         // Perform the signup here
+        fetch("http://localhost:5001/api/vendors/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            changeIsError(false)
+            localStorage.setItem("profile", JSON.stringify(data));
+            navigate('/');
+        })
+        .catch(e => {
+            console.log(e)
+            setErrorMessage("Error: Invalid Credentials")
+            changeIsError(true)
+        })
     };
 
     return (

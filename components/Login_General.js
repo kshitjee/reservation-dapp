@@ -4,19 +4,47 @@ import Link from "next/link";
 const UserLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [userdata, setUserdata] = useState([
+        {
+            email: "",
+            password: "",
+        },
+    ]);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+        setUserdata({
+            ...userdata,
+            email: event.target.value,
+        });
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+        setUserdata({
+            ...userdata,
+            password: event.target.value,
+        });
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Email: ${email} Password: ${password}`);
-        // Perform the login here
+        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                changeIsError(false)
+                localStorage.setItem("profile", JSON.stringify(data));
+                navigate('/');
+            })
+            .catch(e => {
+                console.log(e)
+                console.log("Error Message Here")
+                setErrorMessage("Error: Invalid Credentials")
+                changeIsError(true)
+            })
     };
 
     return (
