@@ -12,6 +12,8 @@ error Auction__TokenIdsDoNotMatchTokenSupplies(
 );
 error Auction__OnlyEventOwnerCanCall(address caller);
 error Auction__BidTooLow();
+error Auction__NotEnoughFunds();
+error Auction__UnauthorizedCaller();
 
 contract Auction {
     /* structs and enums */
@@ -28,6 +30,7 @@ contract Auction {
     /*  state variables */
     address immutable eventImplementation;
     mapping(address => Event) addrToEvent;
+    mapping(address => address) addrToOrg;
     mapping(address => mapping(uint => address[])) addrToIdToQueue;
     mapping(address => mapping(uint => uint)) addrToIdToMinBid;
 
@@ -51,13 +54,7 @@ contract Auction {
     //     address indexed eventAddress,
     // );
 
-    /* modifiers  onlyEventOwner(msg.sender) */
-    modifier onlyEventOwner(address owner) {
-        if (msg.sender != owner) {
-            revert Auction__OnlyEventOwnerCanCall(msg.sender);
-        }
-        _;
-    }
+    /* modifiers */
 
     /* constructor */
     constructor(address _eventImplementation) {
@@ -80,7 +77,11 @@ contract Auction {
             );
         }
         address eventAddress = Clones.clone(eventImplementation);
-        IEvent(eventAddress).initialize(address(this), _baseMetadataURI);
+        IEvent(eventAddress).initialize(
+            msg.sender,
+            address(this),
+            _baseMetadataURI
+        );
         Event memory newEvent = Event(
             _name,
             address(this),
@@ -91,6 +92,7 @@ contract Auction {
             _minBids
         );
         addrToEvent[eventAddress] = newEvent;
+        addrToOrg[eventAddress] = msg.sender;
 
         for (uint i = 0; i < _tokenIds.length; i++) {
             addrToIdToMinBid[eventAddress][i] = _minBids[i];
@@ -103,7 +105,7 @@ contract Auction {
         uint _tokenId,
         uint _newBid
     ) external {
-        
+        addrToIdToMinBid[_eventAddress][_tokenId] = _newBid;
     }
 
     function placeBid(
@@ -114,5 +116,26 @@ contract Auction {
         if (_amount < addrToIdToMinBid[_eventAddress][_tokenId]) {
             revert Auction__BidTooLow();
         }
+        if (msg.sender.balance < addrToIdToMinBid[_eventAddress][_tokenId]) {
+            revert Auction__NotEnoughFunds();
+        }
+        addrToIdToQueue[_eventAddress][_tokenId].push(msg.sender);
     }
+
+    // triggered via web app by some time based event
+    function settleAuction(address _eventAddress) external {
+        if (msg.sender != addrToOrg[_eventAddress]) {
+            revert Auction__UnauthorizedCaller();
+        }
+    }
+
+    function buyNow(
+        address _eventAddress,
+        uint _tokenId,
+        uint _amountOfTokens
+    ) external {}
+
+    function transferBalance() external {}
+
+    function deleteAuction() external {}
 }

@@ -13,20 +13,17 @@ contract EventImplementation is ERC1155Upgradeable {
     /* state variables */
     string private baseMetadataURI;
     address public auctionContract;
-    address public owner;
+    address public organizer;
 
-    /**
-     * @notice Method for Airdropping a single token to those receiving rewards/ airdrops.
-     * @param _auctionContract:
-     * @param _baseMetadataURI: of 1155 contract, via IPFS
-     */
     function initialize(
+        address _organizer,
         address _auctionContract,
         string memory _baseMetadataURI
     ) external {
-        if (!(owner == address(0))) {
+        if (!(organizer == address(0))) {
             revert CollectionImplementation__AlreadyInitialized();
         }
+        organizer = _organizer;
         auctionContract = _auctionContract;
         baseMetadataURI = _baseMetadataURI;
         __ERC1155_init(_baseMetadataURI);
