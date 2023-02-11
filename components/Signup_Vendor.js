@@ -25,6 +25,7 @@ const VendorSignupForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(
+            
             `Name: ${name} Email: ${email} Password: ${password} Address: ${address}`
         );
         // Perform the signup here
