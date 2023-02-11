@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/kshitijchakravarty/Desktop/Development/reservation-dapp/contracts/Auction.sol": {
-      "lastModificationDate": 1676086726868,
-      "contentHash": "58a89bf53a9384baa2a0694780beccb9",
+      "lastModificationDate": 1676132367828,
+      "contentHash": "621d53489b781418b56aa462faba66da",
       "sourceName": "contracts/Auction.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -19,13 +19,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -40,11 +48,11 @@
       ]
     },
     "/Users/kshitijchakravarty/Desktop/Development/reservation-dapp/contracts/EventImplementation.sol": {
-      "lastModificationDate": 1676086250004,
-      "contentHash": "b5adab43027611f2153a70fccdd1114e",
+      "lastModificationDate": 1676131597636,
+      "contentHash": "c82db2ffd1db0bf7f1c3a1e445f3ab93",
       "sourceName": "contracts/EventImplementation.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -57,13 +65,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -82,7 +98,7 @@
       "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -95,13 +111,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [],
@@ -117,7 +141,7 @@
       "contentHash": "2f348910d560ef8dfba41e601c13c525",
       "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -130,13 +154,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -202,7 +234,7 @@
       "contentHash": "6200b84950eb05b4a92a39fd1d6e0f9b",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -215,13 +247,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -239,7 +279,7 @@
       "contentHash": "228f256dbb21393bc9ad02648e222f74",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -252,13 +292,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [],
@@ -274,7 +322,7 @@
       "contentHash": "a407c5f8256246823385d0d7f0a83f57",
       "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -287,13 +335,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -311,7 +367,7 @@
       "contentHash": "fc5844e59776a976987884e4d9814c7d",
       "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -324,13 +380,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -348,7 +412,7 @@
       "contentHash": "5f2d8b81c0ff5bd2047b4846c20b998d",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -361,13 +425,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -386,7 +458,7 @@
       "contentHash": "eb51ed084f6f7fd2c7098715c5690285",
       "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155ReceiverUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -399,13 +471,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -423,7 +503,7 @@
       "contentHash": "8b7e95c747e2dab3b5444b37410a8315",
       "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/IERC1155MetadataURIUpgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -436,13 +516,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [
@@ -460,7 +548,7 @@
       "contentHash": "d6ecf203a5e72c845be9bbf2f304a289",
       "sourceName": "@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -473,13 +561,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [],
@@ -748,7 +844,7 @@
       "contentHash": "11535a839f5494023c396098504f5646",
       "sourceName": "@openzeppelin/contracts/proxy/Clones.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -761,13 +857,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [],
@@ -783,7 +887,7 @@
       "contentHash": "a629c59f2270e4cc3f7b966bc2a3aa37",
       "sourceName": "interfaces/IEvent.sol",
       "solcConfig": {
-        "version": "0.8.9",
+        "version": "0.8.10",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -796,13 +900,21 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata"
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
               ],
               "": [
                 "ast"
               ]
             }
-          }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          },
+          "libraries": {}
         }
       },
       "imports": [],

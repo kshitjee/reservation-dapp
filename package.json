@@ -2,9 +2,6 @@
   "name": "reservation-dapp",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
-
-
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,6 +19,9 @@
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "formik": "^2.2.9",
+    "hardhat-contract-sizer": "^2.6.1",
+    "hardhat-deploy": "^0.11.23",
+    "hardhat-gas-reporter": "^1.0.8",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.0.1",
     "mongoose": "^6.9.1",
@@ -29,7 +29,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "solidity-coverage": "^0.7.21"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
