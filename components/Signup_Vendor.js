@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Router from "next/router";
+
 
 const VendorSignupForm = () => {
     const [name, setName] = useState("");
@@ -34,21 +36,23 @@ const VendorSignupForm = () => {
 
             `Name: ${name} Email: ${email} Password: ${password} Address: ${address}`
         );
-        // Perform the signup here
-        fetch("http://localhost:5001/api/vendors/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            changeIsError(false)
-            localStorage.setItem("profile", JSON.stringify(data));
-            navigate('/');
-        })
-        .catch(e => {
-            console.log(e)
-            setErrorMessage("Error: Invalid Credentials")
-            changeIsError(true)
-        })
+        fetch("http://localhost:5001/api/vendors/signup", { method: "POST", body: JSON.stringify(userdata), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                // changeIsError(false)
+                console.log("huha")
+                localStorage.setItem("profile", JSON.stringify(data));
+                Router.push('/');
+            })
+            .catch(e => {
+                console.log(userdata)
+                console.log(e)
+                console.log("Error Message Here")
+                //setErrorMessage("Error: Invalid Credentials")
+                //changeIsError(true)
+            })
     };
 
     return (

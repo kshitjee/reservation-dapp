@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
+
 
 const VendorLogin = () => {
     const [email, setEmail] = useState("");
@@ -26,27 +28,29 @@ const VendorLogin = () => {
             ...userdata,
             password: event.target.value,
         });
-        
+
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Email: ${email} Password: ${password}`);
         // Perform the login here
-        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/vendors/login", { method: "POST", body: JSON.stringify(userdata), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
         .then(res => {
             return res.json()
         })
         .then(data => {
-            changeIsError(false)
+            // changeIsError(false)
+            console.log("huha")
             localStorage.setItem("profile", JSON.stringify(data));
-            navigate('/');
+            Router.push('/');
         })
         .catch(e => {
+            console.log(userdata)
             console.log(e)
             console.log("Error Message Here")
-            setErrorMessage("Error: Invalid Credentials")
-            changeIsError(true)
+            //setErrorMessage("Error: Invalid Credentials")
+            //changeIsError(true)
         })
     };
 

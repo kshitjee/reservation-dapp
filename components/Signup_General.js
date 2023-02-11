@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Router from "next/router";
+
 
 const SignupForm = () => {
     const [name, setName] = useState("");
@@ -25,21 +27,24 @@ const SignupForm = () => {
         event.preventDefault();
         console.log(`Name: ${name} Email: ${email} Password: ${password}`);
         // Perform the signup here
-        fetch("http://localhost:5001/api/generalusers/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                changeIsError(false)
-                localStorage.setItem("profile", JSON.stringify(data));
-                navigate('/');
-            })
-            .catch(e => {
-                console.log(e)
-                setErrorMessage("Error: Invalid Credentials")
-                changeIsError(true)
-            })
-    };
+        fetch("http://localhost:5001/api/generalusers/signup", { method: "POST", body: JSON.stringify(userdata), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            // changeIsError(false)
+            console.log("huha")
+            localStorage.setItem("profile", JSON.stringify(data));
+            Router.push('/');
+        })
+        .catch(e => {
+            console.log(userdata)
+            console.log(e)
+            console.log("Error Message Here")
+            //setErrorMessage("Error: Invalid Credentials")
+            //changeIsError(true)
+        })
+};
 
     return (
         <div className="w-1/3 mx-auto my-20">
