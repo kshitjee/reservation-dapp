@@ -1,51 +1,118 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+/* imports */
+import "@openzeppelin/contracts/proxy/Clones.sol";
+import "../interfaces/IEvent.sol";
+
+/* errors */
+error Auction__TokenIdsDoNotMatchTokenSupplies(
+    uint256 idsLength,
+    uint256 suppliesLength
+);
+error Auction__OnlyEventOwnerCanCall(address caller);
+error Auction__BidTooLow();
 
 contract Auction {
-    // The address that owns the contract
-    address owner;
-
-    // The NFT that is up for auction
-    uint256 tokenId;
-
-    // The current highest bid
-    uint256 highestBid;
-
-    // The address of the current highest bidder
-    address payable highestBidder;
-
-    // The auction end time
-    uint256 auctionEndTime;
-
-    // Events
-    event NewBid(uint256 bid, address bidder);
-    event AuctionEnd(address winner, uint256 winningBid);
-
-    // Constructor function to initialize the auction
-    constructor(uint256 _tokenId, uint256 _auctionEndTime) public {
-        owner = msg.sender;
-        tokenId = _tokenId;
-        auctionEndTime = _auctionEndTime;
+    /* structs and enums */
+    struct Event {
+        string name;
+        address organizer;
+        string baseMetadataURI;
+        uint[] tokenIds;
+        uint[] tokenSupplies;
+        uint[] tokenStatus;
+        uint[] minBids;
     }
 
-    // Bid on the NFT
-    function bid(uint256 _bid) public payable {
-        require(msg.value > highestBid, "Bid must be higher than the current highest bid");
-        require(block.timestamp < auctionEndTime, "Auction has already ended");
+    /*  state variables */
+    address immutable eventImplementation;
+    mapping(address => Event) addrToEvent;
+    mapping(address => mapping(uint => address[])) addrToIdToQueue;
+    mapping(address => mapping(uint => uint)) addrToIdToMinBid;
 
-        highestBid = _bid;
-        highestBidder = payable(msg.sender);
+    /* events */
+    event EventListed(
+        address indexed eventAddress,
+        string indexed baseMetaDataURI,
+        Event event0
+    );
 
-        emit NewBid(highestBid, highestBidder);
+    // event BidPlaced (
+    //     address indexed hello,
+    // );
+    // event ReservationBought (
+    //     address indexed eventAddress,
+    // )
+    // event AuctionWon (
+    //     address indexed eventAddress,
+    // );
+    // event AuctionDeleted (
+    //     address indexed eventAddress,
+    // );
+
+    /* modifiers  onlyEventOwner(msg.sender) */
+    modifier onlyEventOwner(address owner) {
+        if (msg.sender != owner) {
+            revert Auction__OnlyEventOwnerCanCall(msg.sender);
+        }
+        _;
     }
 
-    // End the auction and award the NFT to the highest bidder
-    function endAuction() public payable {
-        require(block.timestamp >= auctionEndTime, "Auction has not ended yet");
-        require(msg.sender == owner, "Only the owner can end the auction");
+    /* constructor */
+    constructor(address _eventImplementation) {
+        eventImplementation = _eventImplementation;
+    }
 
-        highestBidder.transfer(msg.value);
+    /* external functions */
+    function createEvent(
+        string memory _name,
+        string memory _baseMetadataURI,
+        uint256[] memory _tokenIds,
+        uint256[] memory _tokenSupplies,
+        uint256[] memory _tokenStatus,
+        uint256[] memory _minBids
+    ) external {
+        if (_tokenIds.length != _tokenSupplies.length) {
+            revert Auction__TokenIdsDoNotMatchTokenSupplies(
+                _tokenIds.length,
+                _tokenSupplies.length
+            );
+        }
+        address eventAddress = Clones.clone(eventImplementation);
+        IEvent(eventAddress).initialize(address(this), _baseMetadataURI);
+        Event memory newEvent = Event(
+            _name,
+            address(this),
+            _baseMetadataURI,
+            _tokenIds,
+            _tokenSupplies,
+            _tokenStatus,
+            _minBids
+        );
+        addrToEvent[eventAddress] = newEvent;
 
-        emit AuctionEnd(highestBidder, highestBid);
+        for (uint i = 0; i < _tokenIds.length; i++) {
+            addrToIdToMinBid[eventAddress][i] = _minBids[i];
+        }
+        emit EventListed(eventAddress, _baseMetadataURI, newEvent);
+    }
+
+    function updateMinBid(
+        address _eventAddress,
+        uint _tokenId,
+        uint _newBid
+    ) external {
+        
+    }
+
+    function placeBid(
+        address _eventAddress,
+        uint _tokenId,
+        uint _amount
+    ) external {
+        if (_amount < addrToIdToMinBid[_eventAddress][_tokenId]) {
+            revert Auction__BidTooLow();
+        }
     }
 }
