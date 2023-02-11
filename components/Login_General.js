@@ -30,10 +30,9 @@ const UserLogin = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Email: ${email} Password: ${password}`);
-        // Perform the login here
-        fetch("http://localhost:5001/api/generalusers/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
             .then(res => {
-                return res.json();
+                return res.json()
             })
             .then(data => {
                 changeIsError(false)
@@ -42,6 +41,7 @@ const UserLogin = () => {
             })
             .catch(e => {
                 console.log(e)
+                console.log("Error Message Here")
                 setErrorMessage("Error: Invalid Credentials")
                 changeIsError(true)
             })

@@ -5,6 +5,7 @@ const VendorSignupForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
+    
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -25,7 +26,7 @@ const VendorSignupForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(
-            
+
             `Name: ${name} Email: ${email} Password: ${password} Address: ${address}`
         );
         // Perform the signup here
