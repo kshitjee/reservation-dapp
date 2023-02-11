@@ -20,7 +20,7 @@ export default function GeneralUserAuth() {
 
     }
     const sendLogIn = (e) => {
-        fetch("http://localhost:5001/api/students/login", { method: "POST", body: JSON.stringify(studentData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/generalusers/login", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
             .then(res => {
                 return res.json()
             })
@@ -38,7 +38,7 @@ export default function GeneralUserAuth() {
     }
 
     const sendSignUp = (e) => {
-        fetch("http://localhost:5001/api/students/signup", { method: "POST", body: JSON.stringify(studentData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/generalusers/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
             .then(res => {
                 return res.json();
             })
@@ -60,7 +60,7 @@ export default function GeneralUserAuth() {
     }
 
 
-    const [studentData, setStudentData] = useState({
+    const [userData, setuserData] = useState({
         name: "",
         email: "",
         password: ""
@@ -72,26 +72,6 @@ export default function GeneralUserAuth() {
 
     return (
         <div className="authPage">
-            <h1 className="header">Student</h1>
-            <button onClick={() => exitButton()} className='exitButton'>Exit</button>
-            <form autoComplete="off" validate="true" className="form">
-                <div >
-                    <div className="projectHolder">
-                        <h1 className="header" >{logIn ? "Log In" : "Sign Up"}</h1>
-                        {logIn && (
-                            <>
-                               
-                            </>
-                        )}
-                        {!logIn && (
-                            <>
-
-                            </>
-                        )}
-                        <button className="changeMode" onClick={changeMode}>{!logIn ? "Log In Instead" : "Sign Up instead"}</button>
-                    </div>
-                  </div>
-            </form>
         </div>
     )
 }
