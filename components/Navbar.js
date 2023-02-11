@@ -32,16 +32,16 @@ const Navbar = () => {
                 </Link>
                 <ul className='hidden sm:flex'>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/'>Home</Link>
+                        <Link style={{ color: `${textColor}` }} href='/bidform'>Home</Link>
                     </li>
                     <li className='p-4'>
                         <Link style={{ color: `${textColor}` }} href='/dashboard'>Gallery</Link>
                     </li>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/Login'>Login</Link>
+                        <Link style={{ color: `${textColor}` }} href='/login'>Login</Link>
                     </li>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/Signup'>Sign up</Link>
+                        <Link style={{ color: `${textColor}` }} href='/signup'>Sign up</Link>
                     </li>
                 </ul>
 

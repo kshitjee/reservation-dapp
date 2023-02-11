@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+
 import Router from "next/router";
 
 
@@ -40,7 +41,7 @@ const UserLogin = () => {
                 // changeIsError(false)
                 console.log("huha")
                 localStorage.setItem("profile", JSON.stringify(data));
-                Router.push('/');
+                Router.push('/dashboard');
             })
             .catch(e => {
                 console.log(userdata)
@@ -91,7 +92,7 @@ const UserLogin = () => {
                         </form>
                     </div>
                     <div className="text-center my-4">
-                        <Link href="/vendor-login" className="font-medium underline">Login as Vendor
+                        <Link href="/login_vendor" className="font-medium underline">Login as Vendor
                         </Link>
                     </div>
                 </div>

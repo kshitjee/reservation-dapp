@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
-
+import Link from "next/link";
 
 const VendorSignupForm = () => {
     const [name, setName] = useState("");
@@ -44,7 +44,7 @@ const VendorSignupForm = () => {
                 // changeIsError(false)
                 console.log("huha")
                 localStorage.setItem("profile", JSON.stringify(data));
-                Router.push('/');
+                Router.push('/dashboard');
             })
             .catch(e => {
                 console.log(userdata)
@@ -113,7 +113,12 @@ const VendorSignupForm = () => {
                     Sign Up
                 </button>
             </form>
+            <div>
+                <Link href="/signup" className="font-medium underline">Signup as User
+                </Link>
+            </div>
         </div>
+
     );
 };
 

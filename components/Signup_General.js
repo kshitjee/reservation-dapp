@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
-
+import Link from "next/link";
 
 const SignupForm = () => {
     const [name, setName] = useState("");
@@ -90,6 +90,10 @@ const SignupForm = () => {
                     Sign Up
                 </button>
             </form>
+            <div>
+                <Link href="/signup_vendor" className="font-medium underline">Signup as Vendor
+                </Link>
+            </div>
         </div>
     );
 };

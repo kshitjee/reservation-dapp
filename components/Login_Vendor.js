@@ -43,7 +43,7 @@ const VendorLogin = () => {
             // changeIsError(false)
             console.log("huha")
             localStorage.setItem("profile", JSON.stringify(data));
-            Router.push('/');
+            Router.push('/dashboard');
         })
         .catch(e => {
             console.log(userdata)
@@ -93,7 +93,7 @@ const VendorLogin = () => {
                     </form>
                 </div>
                 <div className="text-center my-4">
-                    <Link href="/vendor-login" className="font-medium underline">Login as Vendor
+                    <Link href="/login" className="font-medium underline">Login as User
                     </Link>
                 </div>
             </div>
