@@ -1,15 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import LoginPage from '../components/LoginGeneral'
+import Navbar from '../components/Navbar.js'
 import styles from '../styles/Home.module.css'
-import Header from '../components/Header.js'
-import Login from '../components/Login'
+
 export default function Home() {
   return (
-    <Header
-      heading="Login to your account"
-      paragraph="Don't have an account yet? "
-      linkName="Signup"
-      linkUrl="/signup"
-    />
+    <Navbar></Navbar>
   )
 }

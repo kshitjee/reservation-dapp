@@ -72,6 +72,7 @@ export default function GeneralUserAuth() {
 
     return (
         <div className="authPage">
+
         </div>
     )
 }
