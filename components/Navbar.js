@@ -35,7 +35,7 @@ const Navbar = () => {
                         <Link style={{ color: `${textColor}` }} href='/'>Home</Link>
                     </li>
                     <li className='p-4'>
-                        <Link style={{ color: `${textColor}` }} href='/#gallery'>Gallery</Link>
+                        <Link style={{ color: `${textColor}` }} href='/dashboard'>Gallery</Link>
                     </li>
                     <li className='p-4'>
                         <Link style={{ color: `${textColor}` }} href='/Login'>Login</Link>
@@ -56,13 +56,13 @@ const Navbar = () => {
                 }>
                     <ul>
                         <li className='p-4 text-4xl hover:text-gray-500'>
-                            <Link href='/'>Home</Link>
+                            <Link href='/dashboard'>Home</Link>
                         </li>
                         <li className='p-4 text-4xl hover:text-gray-500'>
                             <Link href='/#gallery'>Gallery</Link>
                         </li>
                         <li className='p-4 text-4xl hover:text-gray-500'>
-                            <Link href='/portfolio'>Work</Link>
+                            <Link href='/dashboard'>Work</Link>
                         </li>
                         <li className='p-4 text-4xl hover:text-gray-500'>
                             <Link href='/contact'>Contact</Link>
