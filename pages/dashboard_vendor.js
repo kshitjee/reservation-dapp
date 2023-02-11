@@ -5,9 +5,6 @@ import Events from "../components/Events"
 import { ethers } from 'ethers';
 import { useState } from 'react';
 
-
-
-
 const Dashboard = () => {
     const [walletAddress, setWalletAddress] = useState("");
     async function requestAccount() {
@@ -37,22 +34,6 @@ const Dashboard = () => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
         }
     }
-
-    const events = [
-        {
-            id: 1,
-            venue: 'Concert at Central Park',
-            description: 'A live concert featuring top artists',
-            location: 'Central Park, New York'
-        },
-        {
-            id: 2,
-            venue: 'Food Festival',
-            description: 'Taste the best food from around the world',
-            location: 'Battery Park, New York'
-        }
-    ];
-
     return (
         <div className="justify-center my-10 py-10 flex flex-col lg:flex-row">
             <div>
@@ -60,12 +41,6 @@ const Dashboard = () => {
                     onClick={requestAccount}
                 >Request Account</button>
                 <h3>Wallet Address: {walletAddress}</h3>
-            </div>
-            <div className="w-full lg:w-1/2 p-10">
-                <h1 className="text-2xl justify-center font-medium p-10 ">Ongoing Events</h1>
-                <Events events={events} />
-                <Events events={events} />
-
             </div>
             <div className="w-full justify-center lg:w-1/2 p-10 justify-center">
                 <h1 className="text-2xl justify-center font-medium px-10">Dashboard</h1>

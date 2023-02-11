@@ -1,13 +1,20 @@
-import BidForms from '../components/Makebid';
+import React from 'react';
+import BidForm from '../components/Makebid';
 
-function BidsPage() {
+function BidPage() {
+    const sampleData = {
+        eventDescription: 'Auction for a rare painting',
+        location: 'New York',
+        currentOwner: 'John Doe',
+        currentPrice: 10000
+    };
+
     return (
-        <div className="flex justify-center items-center h-screen">
-            <div className="w-1/2 p-6 bg-white rounded-lg shadow-xl">
-                <BidForms />
-            </div>
+        <div className="container mx-auto p-6">
+            <BidForm event={sampleData} />
         </div>
     );
 }
 
-export default BidsPage;
+export default BidPage;
+

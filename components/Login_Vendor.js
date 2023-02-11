@@ -93,7 +93,7 @@ const VendorLogin = () => {
                     </form>
                 </div>
                 <div className="text-center my-4">
-                    <Link href="/login" className="font-medium underline">Login as User
+                    <Link href="/Login" className="font-medium underline">Login as User
                     </Link>
                 </div>
             </div>

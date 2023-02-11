@@ -5,45 +5,11 @@ import { useState } from 'react';
 //const user = JSON.parse(localStorage.getItem("profile"))
 const Dashboard = () => {
 
-    const [walletAddress, setWalletAddress] = useState("");
-    async function requestAccount() {
-        console.log('Requesting account...');
-    
-        if(window.ethereum) {
-          console.log('detected');
-    
-          try {
-            const accounts = await window.ethereum.request({
-              method: "eth_requestAccounts",
-            });
-            setWalletAddress(accounts[0]);
-          } catch (error) {
-            console.log('Error connecting...');
-          }
-    
-        } else {
-          alert('Meta Mask not detected');
-        }
-      }
-    
-      async function connectWallet() {
-        if(typeof window.ethereum !== 'undefined') {
-          await requestAccount();
-    
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-        }
-      }
+
     return (
         <div className="flex h-screen justify-center items-center">
 
-            <header className="App-header">
-                    <button
-                    
-                    onClick={requestAccount}
-                    
-                    >Request Account</button>
-                    <h3>Wallet Address: {walletAddress}</h3>
-                </header>
+
 
             <div className="w-3/4 bg-white p-6 rounded-lg shadow-xl">
                 <h2 className="text-2xl font-bold mb-4">Auction Dashboard</h2>
