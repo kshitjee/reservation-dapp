@@ -44,7 +44,7 @@ const VendorSignupForm = () => {
                 // changeIsError(false)
                 console.log("huha")
                 localStorage.setItem("profile", JSON.stringify(data));
-                Router.push('/dashboard');
+                Router.push('/dashboard_vendor');
             })
             .catch(e => {
                 console.log(userData)
