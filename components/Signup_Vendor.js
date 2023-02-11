@@ -36,7 +36,7 @@ const VendorSignupForm = () => {
 
             `Name: ${name} Email: ${email} Password: ${password} Address: ${address}`
         );
-        fetch("http://localhost:5001/api/vendors/signup", { method: "POST", body: JSON.stringify(userdata), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+        fetch("http://localhost:5001/api/vendors/signup", { method: "POST", body: JSON.stringify(userData), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
             .then(res => {
                 return res.json()
             })
@@ -47,7 +47,7 @@ const VendorSignupForm = () => {
                 Router.push('/dashboard');
             })
             .catch(e => {
-                console.log(userdata)
+                console.log(userData)
                 console.log(e)
                 console.log("Error Message Here")
                 //setErrorMessage("Error: Invalid Credentials")

@@ -1,10 +1,12 @@
 import React from "react";
 import { ethers } from 'ethers';
 import { useState } from 'react';
+import Router from 'next/router';
 
 //const user = JSON.parse(localStorage.getItem("profile"))
 const Dashboard = () => {
 
+    const profile = JSON.parse(window.localStorage.getItem("profile"));
     const [walletAddress, setWalletAddress] = useState("");
     async function requestAccount() {
         console.log('Requesting account...');
@@ -17,6 +19,27 @@ const Dashboard = () => {
               method: "eth_requestAccounts",
             });
             setWalletAddress(accounts[0]);
+            //change wallet address of the user in mongodb
+            const feed = {publicAddress: walletAddress};
+            console.log(profile._id)
+            fetch(`http://localhost:5001/api/generalusers/${profile._id}/updatepublicaddress`, { method: "POST", body: JSON.stringify(feed), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                // changeIsError(false)
+                console.log("huha")
+                localStorage.setItem("profile", JSON.stringify(data));
+                Router.push('/dashboard');
+            })
+            .catch(e => {
+                console.log(feed)
+                console.log(e)
+                console.log("Error Message Here")
+                //setErrorMessage("Error: Invalid Credentials")
+                //changeIsError(true)
+            })
+
           } catch (error) {
             console.log('Error connecting...');
           }
@@ -29,6 +52,7 @@ const Dashboard = () => {
       async function connectWallet() {
         if(typeof window.ethereum !== 'undefined') {
           await requestAccount();
+
     
           const provider = new ethers.providers.Web3Provider(window.ethereum);
         }
