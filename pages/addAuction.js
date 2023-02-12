@@ -65,9 +65,8 @@ function AuctionForm() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("HELLO");
-    const data = JSON.stringify(formData);
-    console.log(data);
+    
+
     const res = await fetch("/api/add-auction", {
       method: "POST",
       headers: {
@@ -76,7 +75,7 @@ function AuctionForm() {
       },
       body: data,
     });
-    // Handle response here
+
   };
   const expiryDate = formData.expiryDate
     ? new Date(formData.expiryDate).toISOString().substr(0, 10)
