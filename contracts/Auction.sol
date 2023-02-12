@@ -109,23 +109,28 @@ contract Auction {
     addrToIdToQueue[_eventAddress][_tokenId].push(msg.sender);
   }
 
-  // triggered via web app by some time based event, NEED TO FIGURE PAYMENT
   function settleAuction(address _eventAddress) external {
     if (msg.sender != addrToOrg[_eventAddress]) {
       revert Auction__UnauthorizedCaller();
     }
     for (uint i = 0; i < addrToNoOfTokenTypes[_eventAddress]; i++) {
+        delete addrToIdToQueue[_eventAddress][i];
+    delete addrToIdToMinBid[_eventAddress][i];
       for (uint j = 0; j < addrToIdToQueue[_eventAddress][i].length; j++) {
         IEvent(_eventAddress).mint(addrToIdToQueue[_eventAddress][i][j], i, 1);
       }
     }
+
+    delete addrToEvent[_eventAddress];
+    delete addrToOrg[_eventAddress];
+    delete addrToNoOfTokenTypes[_eventAddress];
   }
 
-  function buyNow(
-    address _eventAddress,
-    uint _tokenId,
-    uint _amountOfTokens
-  ) external {}
+  //   function buyNow(
+  //     address _eventAddress,
+  //     uint _tokenId,
+  //     uint _amountOfTokens
+  //   ) external {}
 
   // function transferBalance() external {}
   // function deleteAuction() external {}
