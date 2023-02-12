@@ -24,14 +24,14 @@
 //     }, []);
 import React, { useState, useEffect } from 'react';
 import MakeBid from '../components/MakeBid';
+import ethers from 'ethers';
 
 const AuctionsPage = (props) => {
-
-
-
+    
     return (
         <div className="container mx-auto">
-            {<MakeBid data={props.data} />}
+            {<MakeBid data={props.data}
+            />}
         </div>
     );
 };
@@ -45,10 +45,16 @@ export async function getServerSideProps() {
         contentType: "application/json"
     });
     const data = await response.json();
+    if (typeof window !== 'undefined') {
+        console.log('we are running on the client')
+    } else {
+        console.log('we are running on the server');
+    }
+
 
     return {
         props: {
-            data,
+            data
         },
     };
 }

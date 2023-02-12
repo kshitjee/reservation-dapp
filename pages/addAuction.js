@@ -127,7 +127,6 @@ function AuctionForm() {
                 .then(data => {
                     // changeIsError(false)
                     console.log("huha")
-                    localStorage.setItem("profile", JSON.stringify(data));
                 })
                 .catch(e => {
                     console.log(e)
