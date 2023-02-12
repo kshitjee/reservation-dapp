@@ -1,13 +1,17 @@
-# Sample Hardhat Project
+Reservation DApp
+A decentralized application (DApp) that enables users to make reservations for their favorite places, powered by the Ethereum blockchain.
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+Table of Contents
+Features
+Getting Started
+Technology Stack
+How It Works
+Screenshots
+Contributing
+Support
+License
+Features
+Easy and secure reservation management for places like hotels, restaurants, etc.
+Decentralized, transparent and tamper-proof reservation data stored on the Ethereum blockchain.
+Ability to view the reservation history of a place.
+Option to cancel a reservation.
