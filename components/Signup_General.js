@@ -35,7 +35,7 @@ const SignupForm = () => {
             // changeIsError(false)
             console.log("huha")
             localStorage.setItem("profile", JSON.stringify(data));
-            Router.push('/');
+            Router.push('/bidform');
         })
         .catch(e => {
             console.log(userdata)
