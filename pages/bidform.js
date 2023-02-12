@@ -35,7 +35,7 @@ const AuctionsPage = (props) => {
             <header>
                 <nav className="flex items-center justify-between p-6 bg-black fixed w-full top-0">
                     <Link href="/"><h2 className="font-bold text-4xl text-white">Koraline</h2></Link>
-                    <Link href="#" className=" text-white py-2 px-4 rounded-full">Sign Out</Link>
+                    <Link href="/" className=" text-white py-2 px-4 rounded-full">Sign Out</Link>
                 </nav>
             </header>
             <div className="container mx-auto mt-24">
