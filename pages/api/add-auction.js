@@ -21,7 +21,6 @@ export default async function handler(req, res) {
       leastBid : request.ticketTiers[i].minimumThreshold,
       quantity : request.ticketTiers[i].quantity,
       minimumThreshold : request.ticketTiers[i].minimumThreshold,
-      
       // 
     });
   }
