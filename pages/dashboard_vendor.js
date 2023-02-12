@@ -18,6 +18,27 @@ const Dashboard = () => {
                     method: "eth_requestAccounts",
                 });
                 setWalletAddress(accounts[0]);
+                //change wallet address in mongodb
+                const profile = JSON.parse(window.localStorage.getItem("profile"));
+                const feed = {publicAddress: accounts[0]};
+                console.log(profile._id)
+                fetch(`http://localhost:5001/api/vendors/${profile._id}/updatepublicaddress`, { method: "POST", body: JSON.stringify(feed), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    // changeIsError(false)
+                    console.log("huha")
+                    localStorage.setItem("profile", JSON.stringify(data));
+                })
+                .catch(e => {
+                    console.log(feed)
+                    console.log(e)
+                    console.log("Error Message Here")
+                    //setErrorMessage("Error: Invalid Credentials")
+                    //changeIsError(true)
+                })
+
             } catch (error) {
                 console.log('Error connecting...');
             }
