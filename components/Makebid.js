@@ -66,7 +66,7 @@ import React, { useState, useEffect } from 'react';
 
 const MakeBid = ({ data }) => {
 
-    
+    console.log(data)
       
     const [formData, setFormData] = useState({
         bid: 0,
@@ -120,6 +120,12 @@ const MakeBid = ({ data }) => {
       }
     };
 
+    
+  
+      
+        
+
+
     return (
         <div>
             {data.map((auction, index) => {
@@ -134,7 +140,9 @@ const MakeBid = ({ data }) => {
 
                 return (
                     <div key={index} className="flex flex-col w-1/2 mx-auto my-10 p-4 border border-gray-400 rounded-lg">
-                        <h2 className="text-xl font-medium mb-4 text-center">{auction.owner}</h2>
+                        <h2 className="text-xl font-medium mb-4 text-center">
+                        {auction.vendorName}
+                        </h2>
                         <p className="text-sm font-light mb-2">Expiry Date: {auction.expiryDate}</p>
                         <p className="text-sm font-light mb-2">Description: {auction.description}</p>
                         {ownerAuctions.map((auction, subIndex) => (

@@ -36,6 +36,20 @@ const AuctionsPage = (props) => {
     );
 };
 
+const ownerName = async (owner) => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/vendors/${owner}`, {
+        method: "GET",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      return data.name;
+    } catch (error) {
+      console.error(error);
+      return 'Error';
+    }
+  };
+
 //get server side props
 export async function getServerSideProps() {
     const response = await fetch(`http://localhost:5001/api/auctions/`, {
@@ -44,12 +58,14 @@ export async function getServerSideProps() {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         contentType: "application/json"
     });
-    const data = await response.json();
-    if (typeof window !== 'undefined') {
-        console.log('we are running on the client')
-    } else {
-        console.log('we are running on the server');
-    }
+    
+    let data = await response.json();
+    data = await Promise.all(data.map(async (auction) => {
+        const vendorName = await ownerName(auction.owner);
+        return {...auction, vendorName};
+      }));
+      
+      
 
 
     return {
