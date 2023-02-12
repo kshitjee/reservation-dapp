@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 //import auction schema
 import auctionSchema from "../lib/models/auctionSchema.js";
+// import { create } from "ipfs-http-client"
+const fs = require('fs');
+const { pinataSDK } = require('@pinata/sdk');
+const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_KEY);
 
+const ipfs = create("https://ipfs.infura.io:5001")
 
 
 function AuctionForm() {
@@ -16,7 +21,6 @@ function AuctionForm() {
         image: null,
         imageBuffer: null,
         minimumThreshold: 0,
-
       },
     ],
   });
@@ -66,32 +70,30 @@ function AuctionForm() {
           image: null,
           imageBuffer: null,
           minimumThreshold: 0,
-
         },
       ],
     }));
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log(formData)
+
+    console.log(formData);
 
     const profile = JSON.parse(window.localStorage.getItem("profile"));
   
-    console.log("here")
+    console.log("here");
     const request = formData;
     console.log(request.name);
     console.log(request.description);
     console.log(request.ticketTiers);
     console.log(request.quantity);
     const ticketTiers = request.ticketTiers;
-    const tierData = [];
-    //   console.log(request.ticketTiers[0].quantity);
-    //   console.log(request.ticketTiers[0].image);
-    //   add to database
+    const tierTokenMetaData = [];
+    let i = 0;
+    const tokenIds = [];
 
     ticketTiers.map(async (ticketTier, index) => {
-      //const ipfsImageResult = await ipfs.add(ticketTier[index]["jpgBuffer"]["data"])
+      const ipfsImageResult = await ipfs.add(ticketTier[index]["jpgBuffer"]["data"]);
 
       const thisTier = {
         owner : profile._id,
@@ -103,10 +105,21 @@ function AuctionForm() {
         minimumThreshold : request.ticketTiers[index].minimumThreshold
       }
 
-      //thisTier["ipfsImageURL"] = "https://gateway.ipfs.io/ipfs/" + result.ipfsImageResult
+      // Upload image data to IPFS and save URL to within thisTier
+      thisTier["ipfsImageURL"] = "https://gateway.ipfs.io/ipfs/" + ipfsImageResult.path;
+      tierTokenMetaData.push(thisTier);
+      console.log("Token tier image data is uploaded to IPFS & saved locally");
       //const ipfsMetadataURL = await ipfs.add(JSON.stringify(thisTier))
       //thisTier["ipfsMetadataURL"] = "https://gateway.ipfs.io/ipfs/" + result.path
 
+      fs.writeFile(`tempFiles/${i + 1}.json`, thisTier, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("Token tier JSON data is saved locally");
+      });
+
+      // Update Database with new auction data
       fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(thisTier), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
                 .then(res => {
                     return res.json()
@@ -122,7 +135,15 @@ function AuctionForm() {
                     //setErrorMessage("Error: Invalid Credentials")
                     //changeIsError(true)
                 })
+      i++;
     });
+
+      // UPLOAD NFT METADATA TO IPFS VIA PINATA
+      const appDir = __basedir; //__dirname.substring(0, __dirname.length - 6); // was 22, changed to 6 to reach root directory
+      const sourcePath = appDir + 'tempFiles/';
+      const cid = await pinata.pinFromFS(sourcePath);
+      let baseMetadataURI = "https://gateway.pinata.cloud/ipfs/" + cid.IpfsHash
+
     // const res = await fetch("/api/add-auction", {
     //   method: "POST",
     //   headers: {
@@ -131,10 +152,7 @@ function AuctionForm() {
     //   },
     //   body: formData,
     // });
-
   };
-
-
 
   const expiryDate = formData.expiryDate
     ? new Date(formData.expiryDate).toISOString().substr(0, 10)
@@ -157,7 +175,10 @@ function AuctionForm() {
 
   return (
     <div className="flex flex-col items-center justify-center h-1/3 py-10 w-full">
-      <form className="w-full max-w-lg p-10 bg-white rounded-lg shadow-xl" onSubmit={handleSubmit}>
+      <form
+        className="w-full max-w-lg p-10 bg-white rounded-lg shadow-xl"
+        onSubmit={handleSubmit}
+      >
         <label className="block mb-2 text-gray-700 font-medium">
           Name:
           <input
@@ -192,7 +213,9 @@ function AuctionForm() {
 
         {formData.ticketTiers.map((tier, index) => (
           <div key={index} className="mb-10">
-            <h3 className="text-lg font-medium mb-2">Ticket Tier {index + 1}</h3>
+            <h3 className="text-lg font-medium mb-2">
+              Ticket Tier {index + 1}
+            </h3>
             <label className="block mb-2 text-gray-700 font-medium">
               Tier Name:
               <input
@@ -224,7 +247,9 @@ function AuctionForm() {
                 type="number"
                 name="minimumThreshold"
                 value={tier.minimumThreshold}
-                onChange={(event) => handleTierTicketChange(event, index, "text")}
+                onChange={(event) =>
+                  handleTierTicketChange(event, index, "text")
+                }
               />
             </label>
 
@@ -255,13 +280,20 @@ function AuctionForm() {
           </div>
         ))}
         <div className="flex justify-between mt-8">
-          <button className="px-4 py-2 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white" type="button" onClick={handleAddTier}>
+          <button
+            className="px-4 py-2 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white"
+            type="button"
+            onClick={handleAddTier}
+          >
             Add Ticket Tier
           </button>
 
-          <button className="px-4 py-2 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white" type="submit">Submit</button>
-
-
+          <button
+            className="px-4 py-2 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white"
+            type="submit"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
