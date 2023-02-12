@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import Router from "next/router";
+import Navbar from "./Navbar";
 
 
 const UserLogin = () => {
@@ -53,9 +54,11 @@ const UserLogin = () => {
     };
 
     return (
+        <>
+
         <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: `url()` }}>
             <div className="flex h-screen">
-                <div className="m-auto w-3/4 lg:w-1/2">
+                    <div className="m-auto w-1/2 lg:w-1/2">
                     <div className="bg-white p-6 rounded shadow">
                         <h2 className="text-lg font-medium mb-4">Login</h2>
                         <form onSubmit={handleSubmit} className="">
@@ -92,12 +95,13 @@ const UserLogin = () => {
                         </form>
                     </div>
                     <div className="text-center my-4">
-                        <Link href="/login_vendor" className="font-medium underline">Login as Vendor
+                            <Link href="/login_vendor" className="font-medium underline text-white">Login as Vendor
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+        </>
     );
 };
 

@@ -55,7 +55,7 @@ const VendorLogin = () => {
     };
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen w-full">
             <div className="m-auto">
                 <div className="bg-white p-6 rounded shadow">
                     <h2 className="text-lg font-medium mb-4">Login</h2>
@@ -93,7 +93,7 @@ const VendorLogin = () => {
                     </form>
                 </div>
                 <div className="text-center my-4">
-                    <Link href="/Login" className="font-medium underline">Login as User
+                    <Link href="/Login" className="font-medium underline text-white">Login as User
                     </Link>
                 </div>
             </div>

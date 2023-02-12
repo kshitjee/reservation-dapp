@@ -62,6 +62,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 
 
 const MakeBid = ({ data }) => {
@@ -127,6 +128,7 @@ const MakeBid = ({ data }) => {
 
 
     return (
+        <>
         <div>
             {data.map((auction, index) => {
                 if (processedOwners.has(auction.owner)) {
@@ -139,7 +141,7 @@ const MakeBid = ({ data }) => {
                 );
 
                 return (
-                    <div key={index} className="flex flex-col w-1/2 mx-auto my-10 p-4 border border-gray-400 rounded-lg">
+                    <div key={index} className="flex flex-col w-1/2 mt-16 mx-auto my-10 p-10 border border-gray-400 rounded-lg">
                         <h2 className="text-xl font-medium mb-4 text-center">
                         {auction.vendorName}
                         </h2>
@@ -183,7 +185,8 @@ const MakeBid = ({ data }) => {
 
 
             })}
-        </div>
+            </div>
+        </>
     );
 };
 

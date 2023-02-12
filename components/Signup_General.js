@@ -47,7 +47,13 @@ const SignupForm = () => {
 };
 
     return (
-        <div className="w-1/3 mx-auto my-20">
+        <>
+            <nav className="flex items-center justify-between p-6 bg-black fixed w-full top-0">
+                <Link href="/"><h2 className="font-bold text-4xl text-white">Koraline</h2></Link>
+                <Link href="/Login" className=" text-white py-2 px-4 rounded-full">Login</Link>
+            </nav>
+            <div>
+                <div className="w-1/3 mx-auto my-20">
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded">
                 <h2 className="text-lg font-medium mb-4">Sign Up</h2>
                 <div className="mb-4">
@@ -94,7 +100,9 @@ const SignupForm = () => {
                 <Link href="/signup_vendor" className="font-medium underline">Signup as Vendor
                 </Link>
             </div>
-        </div>
+                </div>
+            </div>
+        </>
     );
 };
 
