@@ -8,9 +8,7 @@ A decentralized application (DApp) that enables users to make reservations for t
 - [Technology Stack](#technology-stack)
 - [How It Works](#how-it-works)
 - [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [Support](#support)
-- [License](#license)
+
 
 ## Features
 - Easy and secure reservation management for places like hotels, restaurants, etc.
@@ -29,7 +27,17 @@ You can follow the steps below to run the DApp locally:
 1. Clone the repository
 2. Install dependencies by running `npm install`
 3. Run the backend by doing 'cd lib' and then 'node server.js'
-4. Run the frontend by running 'npm start'
+4. Run the frontend by running 'npm start''
+
+
+## Technology Stack
+- MongoDB
+- Express.js
+- Next.js
+- Node.js
+- Solidity
+- Hardhat
+
 
 
 ## How It Works
