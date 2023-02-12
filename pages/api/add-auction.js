@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
   const profile = JSON.parse(window.localStorage.getItem("profile"));
   
+  console.log("here")
   const request = req.body;
   console.log(request.name);
   console.log(request.description);
