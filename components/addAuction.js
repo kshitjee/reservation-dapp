@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Link from "next/link";
 const AddAuction = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -50,6 +50,12 @@ const AddAuction = () => {
     };
 
     return (
+        <>
+            <nav className="flex items-center justify-between p-6 bg-black fixed w-full top-0">
+                <Link href="/"><h2 className="font-bold text-4xl text-white">Koraline</h2></Link>
+                <Link href="/Login" className=" text-white py-2 px-4 rounded-full">Login</Link>
+            </nav>
+
         <div className="bg-gray-200 min-h-screen">
             <nav className="bg-white p-6">
                 <div className="container mx-auto">
@@ -154,7 +160,8 @@ const AddAuction = () => {
                     </div>
                 </form>
             </div >
-        </div >
+            </div >
+        </>
     );
 };
 

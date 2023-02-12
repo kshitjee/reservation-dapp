@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import auction schema
 import auctionSchema from "../lib/models/auctionSchema.js";
+import Link from "next/link.js";
 
 function AuctionForm() {
   const [formData, setFormData] = useState({
@@ -144,7 +145,12 @@ function AuctionForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-1/3 py-10 w-full">
+    <>
+      <nav className="flex items-center justify-between p-6 bg-black fixed w-full top-0">
+        <Link href="/"><h2 className="font-bold text-4xl text-white">Koraline</h2></Link>
+        <Link href="/" className=" text-white py-2 px-4 rounded-full">Sign out</Link>
+      </nav>
+      <div className="flex flex-col items-center justify-center h-1/3 py-10 w-full mt-24">
       <form
         className="w-full max-w-lg p-10 bg-white rounded-lg shadow-xl"
         onSubmit={handleSubmit}
@@ -266,7 +272,8 @@ function AuctionForm() {
           </button>
         </div>
       </form>
-    </div>
+      </div>
+    </>
   );
 }
 
