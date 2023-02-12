@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 //import auction schema
 import auctionSchema from "../lib/models/auctionSchema.js";
-// import { create } from "ipfs-http-client"
-const fs = require('fs');
-const { pinataSDK } = require('@pinata/sdk');
-const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_KEY);
-
-const ipfs = create("https://ipfs.infura.io:5001")
-
 
 function AuctionForm() {
   const [formData, setFormData] = useState({
@@ -77,10 +70,19 @@ function AuctionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const res = await fetch("/api/add-auction", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
     console.log(formData);
 
     const profile = JSON.parse(window.localStorage.getItem("profile"));
-  
+
     console.log("here");
     const request = formData;
     console.log(request.name);
@@ -93,65 +95,43 @@ function AuctionForm() {
     const tokenIds = [];
 
     ticketTiers.map(async (ticketTier, index) => {
-      const ipfsImageResult = await ipfs.add(ticketTier[index]["jpgBuffer"]["data"]);
-
       const thisTier = {
-        owner : profile._id,
-        expiryDate : request.expiryDate,
-        name : request.name + " " + request.ticketTiers[index].name,
-        description : request.description,
-        leastBid : request.ticketTiers[index].minimumThreshold,
-        quantity : request.ticketTiers[index].quantity,
-        minimumThreshold : request.ticketTiers[index].minimumThreshold
-      }
-
-      // Upload image data to IPFS and save URL to within thisTier
-      thisTier["ipfsImageURL"] = "https://gateway.ipfs.io/ipfs/" + ipfsImageResult.path;
-      tierTokenMetaData.push(thisTier);
-      console.log("Token tier image data is uploaded to IPFS & saved locally");
-      //const ipfsMetadataURL = await ipfs.add(JSON.stringify(thisTier))
-      //thisTier["ipfsMetadataURL"] = "https://gateway.ipfs.io/ipfs/" + result.path
-
-      fs.writeFile(`tempFiles/${i + 1}.json`, thisTier, (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log("Token tier JSON data is saved locally");
-      });
+        owner: profile._id,
+        expiryDate: request.expiryDate,
+        name: request.name + " " + request.ticketTiers[index].name,
+        description: request.description,
+        leastBid: request.ticketTiers[index].minimumThreshold,
+        quantity: request.ticketTiers[index].quantity,
+        minimumThreshold: request.ticketTiers[index].minimumThreshold,
+      };
 
       // Update Database with new auction data
-      fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(thisTier), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
-                .then(res => {
-                    return res.json()
-                })
-                .then(data => {
-                    // changeIsError(false)
-                    console.log("huha")
-                    localStorage.setItem("profile", JSON.stringify(data));
-                })
-                .catch(e => {
-                    console.log(e)
-                    console.log("Error Message Here")
-                    //setErrorMessage("Error: Invalid Credentials")
-                    //changeIsError(true)
-                })
+      // fetch(`http://localhost:5001/api/auctions/createauction`, {
+      //   method: "POST",
+      //   body: JSON.stringify(thisTier),
+      //   mode: "cors",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      //   contentType: "application/json",
+      // })
+      //   .then((res) => {
+      //     return res.json();
+      //   })
+      //   .then((data) => {
+      //     // changeIsError(false)
+      //     console.log("huha");
+      //     localStorage.setItem("profile", JSON.stringify(data));
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //     console.log("Error Message Here");
+      //     //setErrorMessage("Error: Invalid Credentials")
+      //     //changeIsError(true)
+      //   });
       i++;
     });
-
-      // UPLOAD NFT METADATA TO IPFS VIA PINATA
-      const appDir = __basedir; //__dirname.substring(0, __dirname.length - 6); // was 22, changed to 6 to reach root directory
-      const sourcePath = appDir + 'tempFiles/';
-      const cid = await pinata.pinFromFS(sourcePath);
-      let baseMetadataURI = "https://gateway.pinata.cloud/ipfs/" + cid.IpfsHash
-
-    // const res = await fetch("/api/add-auction", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json, text/plain, */*",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: formData,
-    // });
   };
 
   const expiryDate = formData.expiryDate
