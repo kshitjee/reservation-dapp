@@ -2,9 +2,9 @@
 
 Koraline
 
-A decentralized application (DApp) that enables users to make reservations for their favorite places, powered by the Ethereum blockchain.
+A decentralized application (DApp) that enables users to make reservations for their favorite places, powered by the Ethereum blockchain. \\
 
-//style these well for the readme md table contents should be bold
+
 #Table of Contents
 ##Features
 ##Getting Started
