@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+//import auction schema
+import auctionSchema from "../lib/models/auctionSchema.js";
+
+
 
 function AuctionForm() {
   const [formData, setFormData] = useState({
@@ -11,6 +15,8 @@ function AuctionForm() {
         auctionOnly: false,
         image: null,
         imageBuffer: null,
+        minimumThreshold: 0,
+
       },
     ],
   });
@@ -59,6 +65,8 @@ function AuctionForm() {
           auctionOnly: false,
           image: null,
           imageBuffer: null,
+          minimumThreshold: 0,
+
         },
       ],
     }));
@@ -66,17 +74,64 @@ function AuctionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log(formData)
 
-    const res = await fetch("/api/add-auction", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: data,
+    const profile = JSON.parse(window.localStorage.getItem("profile"));
+  
+    console.log("here")
+    const request = formData;
+    console.log(request.name);
+    console.log(request.description);
+    console.log(request.ticketTiers);
+    console.log(request.quantity);
+    const ticketTiers = request.ticketTiers;
+//   console.log(request.ticketTiers[0].quantity);
+//   console.log(request.ticketTiers[0].image);
+
+  // add to database
+
+    ticketTiers.map(async (ticketTier, index) => {
+
+      const bingbong = {
+        owner : profile._id,
+        expiryDate : request.expiryDate,
+        name : request.name + " " + request.ticketTiers[index].name,
+        description : request.description ,
+        leastBid : request.ticketTiers[index].minimumThreshold,
+        quantity : request.ticketTiers[index].quantity,
+        minimumThreshold : request.ticketTiers[index].minimumThreshold
+      }
+      fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(bingbong), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    // changeIsError(false)
+                    console.log("huha")
+                    localStorage.setItem("profile", JSON.stringify(data));
+                })
+                .catch(e => {
+                    console.log(e)
+                    console.log("Error Message Here")
+                    //setErrorMessage("Error: Invalid Credentials")
+                    //changeIsError(true)
+                })
+
+      
     });
+    // const res = await fetch("/api/add-auction", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json, text/plain, */*",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: formData,
+    // });
 
   };
+
+
+
   const expiryDate = formData.expiryDate
     ? new Date(formData.expiryDate).toISOString().substr(0, 10)
     : "";
