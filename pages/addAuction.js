@@ -85,23 +85,29 @@ function AuctionForm() {
     console.log(request.ticketTiers);
     console.log(request.quantity);
     const ticketTiers = request.ticketTiers;
-//   console.log(request.ticketTiers[0].quantity);
-//   console.log(request.ticketTiers[0].image);
-
-  // add to database
+    const tierData = [];
+    //   console.log(request.ticketTiers[0].quantity);
+    //   console.log(request.ticketTiers[0].image);
+    //   add to database
 
     ticketTiers.map(async (ticketTier, index) => {
+      //const ipfsImageResult = await ipfs.add(ticketTier[index]["jpgBuffer"]["data"])
 
-      const bingbong = {
+      const thisTier = {
         owner : profile._id,
         expiryDate : request.expiryDate,
         name : request.name + " " + request.ticketTiers[index].name,
-        description : request.description ,
+        description : request.description,
         leastBid : request.ticketTiers[index].minimumThreshold,
         quantity : request.ticketTiers[index].quantity,
         minimumThreshold : request.ticketTiers[index].minimumThreshold
       }
-      fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(bingbong), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+
+      //thisTier["ipfsImageURL"] = "https://gateway.ipfs.io/ipfs/" + result.ipfsImageResult
+      //const ipfsMetadataURL = await ipfs.add(JSON.stringify(thisTier))
+      //thisTier["ipfsMetadataURL"] = "https://gateway.ipfs.io/ipfs/" + result.path
+
+      fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(thisTier), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
                 .then(res => {
                     return res.json()
                 })
@@ -116,8 +122,6 @@ function AuctionForm() {
                     //setErrorMessage("Error: Invalid Credentials")
                     //changeIsError(true)
                 })
-
-      
     });
     // const res = await fetch("/api/add-auction", {
     //   method: "POST",
