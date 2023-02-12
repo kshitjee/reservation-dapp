@@ -106,30 +106,20 @@ function AuctionForm() {
       };
 
       // Update Database with new auction data
-      // fetch(`http://localhost:5001/api/auctions/createauction`, {
-      //   method: "POST",
-      //   body: JSON.stringify(thisTier),
-      //   mode: "cors",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      //   contentType: "application/json",
-      // })
-      //   .then((res) => {
-      //     return res.json();
-      //   })
-      //   .then((data) => {
-      //     // changeIsError(false)
-      //     console.log("huha");
-      //     localStorage.setItem("profile", JSON.stringify(data));
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //     console.log("Error Message Here");
-      //     //setErrorMessage("Error: Invalid Credentials")
-      //     //changeIsError(true)
-      //   });
+      fetch(`http://localhost:5001/api/auctions/createauction`, { method: "POST", body: JSON.stringify(thisTier), mode: 'cors', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, contentType: "application/json" })
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    // changeIsError(false)
+                    console.log("huha")
+                })
+                .catch(e => {
+                    console.log(e)
+                    console.log("Error Message Here")
+                    //setErrorMessage("Error: Invalid Credentials")
+                    //changeIsError(true)
+                })
       i++;
     });
   };

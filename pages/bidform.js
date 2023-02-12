@@ -24,17 +24,31 @@
 //     }, []);
 import React, { useState, useEffect } from 'react';
 import MakeBid from '../components/MakeBid';
+import ethers from 'ethers';
 
 const AuctionsPage = (props) => {
-
-
-
+    
     return (
         <div className="container mx-auto">
-            {<MakeBid data={props.data} />}
+            {<MakeBid data={props.data}
+            />}
         </div>
     );
 };
+
+const ownerName = async (owner) => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/vendors/${owner}`, {
+        method: "GET",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      return data.name;
+    } catch (error) {
+      console.error(error);
+      return 'Error';
+    }
+  };
 
 //get server side props
 export async function getServerSideProps() {
@@ -44,11 +58,19 @@ export async function getServerSideProps() {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         contentType: "application/json"
     });
-    const data = await response.json();
+    
+    let data = await response.json();
+    data = await Promise.all(data.map(async (auction) => {
+        const vendorName = await ownerName(auction.owner);
+        return {...auction, vendorName};
+      }));
+      
+      
+
 
     return {
         props: {
-            data,
+            data
         },
     };
 }
