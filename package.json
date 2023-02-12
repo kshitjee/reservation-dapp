@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.10.5",
     "@openzeppelin/contracts": "^4.8.1",
     "@openzeppelin/contracts-upgradeable": "^4.8.1",
     "@pinata/sdk": "^1.1.26",
@@ -22,6 +24,7 @@
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "formik": "^2.2.9",
+    "framer-motion": "^9.0.2",
     "hardhat-contract-sizer": "^2.6.1",
     "hardhat-deploy": "^0.11.23",
     "hardhat-gas-reporter": "^1.0.8",
@@ -34,7 +37,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.1",
-    "solidity-coverage": "^0.7.21"
+    "solidity-coverage": "^0.7.21",
+    "three": "^0.149.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",

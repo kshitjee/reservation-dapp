@@ -7,7 +7,7 @@ import addAuction from '../components/addAuction'
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <addAuction />
       <Component {...pageProps} />
     </>
